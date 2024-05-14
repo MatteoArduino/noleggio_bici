@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>benvenuto</title>
-</head>
-<body>
-    
-    <h1>benvenuto</h1>
-</body>
+<html>
+    <head>
+        <!--inclusione del foglio di stile interno-->
+        <link href="styles/style.css" rel="stylesheet">
+
+        <!--inclusione della libreria che permette di usare lo script-->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <!--parte di scripting-->
+        <script>
+            //controllo se il documento è stato caricato
+            $("document").ready(function(){
+                //reindirizzamento alla login
+                window.location.href ="html/index.html";
+            });
+        </script>
+    </head>
 </html>
