@@ -1,0 +1,15 @@
+#map {
+
+    height: 600px;
+    width: 1600px;
+    align-items: center;
+    margin-top: 45px;
+    margin: 0 auto;
+    border-radius: 10px;
+
+}
+
+#login-form {
+
+    margin-top: 70px;
+}
