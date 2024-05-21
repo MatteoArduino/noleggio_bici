@@ -1,16 +1,34 @@
 #map {
-
-    height: 600px;
     width: 1600px;
-    align-items: center;
-    margin-top: 45px;
+    height: 600px;
     margin: 0 auto;
-    border-radius: 10px;
-
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
 }
 
-#login-form {
-
-    margin-top: 70px;
+#header {
+    background-color: grey;
+    padding: 20px 25px; /* Aggiunta di padding orizzontale */
+    display: flex; /* Per la disposizione dei link in linea */
+    justify-content: center; /* Centrare i link orizzontalmente */
+    align-items: center; /* Centrare i link verticalmente */
+    gap: 20px; /* Spazio tra i link */
+    border-radius: 10px; /* Arrotondamento degli angoli */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombreggiatura per il header */
+    
 }
 
+#header a {
+    color: white; /* Colore del testo dei link */
+    text-decoration: none; /* Rimozione della sottolineatura */
+    font-size: 16px; /* Dimensione del font */
+    padding: 10px 20px; /* Padding interno dei link */
+    background-color: #555; /* Colore di sfondo dei link */
+    border-radius: 5px; /* Arrotondamento degli angoli dei link */
+    transition: background-color 0.3s; /* Transizione per l'effetto hover */
+}
+
+#header a:hover {
+    background-color: #777; /* Colore di sfondo dei link al passaggio del mouse */
+}

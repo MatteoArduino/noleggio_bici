@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#navigation {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#navigation button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+#navigation button:hover {
+    background-color: #0056b3;
+}
+
+section {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    display: none;
+    /* Nasconde le sezioni inizialmente */
+}
+
+section.active {
+    display: block;
+    /* Mostra la sezione attiva */
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#tratte-list,
+#riepiloghi-list {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+#tratte-list div,
+#riepiloghi-list div {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+#tratte-list div:last-child,
+#riepiloghi-list div:last-child {
+    border-bottom: none;
+}
+
+.profile-field {
+    margin-bottom: 10px;
+}
+
+.profile-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.profile-actions {
+    text-align: center;
+}
+
+.profile-actions button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.profile-actions button:hover {
+    background-color: #0056b3;
+}
+
+#btn-logout {
+    display: block;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px auto 0;
+    text-align: center;
+}
+
+#btn-logout:hover {
+    background-color: #5a6268;
+}
+
+.tratta {
+    display: flex;
+    gap: 10px; /* Spazio tra gli elementi interni */
+    margin-bottom: 30px; /* Spazio tra le righe */
+}
+
+.tratta span {
+    display: inline-block;
+    margin-right: 10px; /* Spazio tra i dettagli, opzionale */
+}
+

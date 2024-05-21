@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- inclusione di jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- inclusione CryptoJS tramite CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+    <script src="../JS/gestioneCliente.js"></script>
+
+    <link rel="stylesheet" href="../styles/clientStyle.css">
+
+
+    <script>
+      $(document).ready(function () {
+        // Funzione per mostrare la sezione selezionata
+        function showSection(sectionId) {
+          $('section').removeClass('active');
+          $(sectionId).addClass('active');
+        }
+
+        // gestione click dei pulsanti
+
+        $("#view-tratte-btn").click(function () {
+          
+          showSection('#tratte');
+          loadTratte();
+
+        });
+
+
+        $("#view-riepiloghi-btn").click(function () {
+          
+          showSection('#riepiloghi');
+          // Caricare e visualizzare i riepiloghi, se necessario
+
+        });
+
+        $("#view-profile-btn").click(function () {
+          
+          showSection('#profile');
+          // Caricare i dati del profilo, se necessario
+
+        });
+
+
+        $("#save-profile-btn").click(function () {
+          
+          //aggiornamento profilo
+          alert("profilo aggiornato");
+        });
+
+        $("#btn-logout").click(function () {
+          // logout
+          window.location.href = "../php/logout.php";
+
+        });
+
+        
+
+        // Mostra la prima sezione di default
+        showSection('#tratte');
+        loadTratte();
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Pulsanti di navigazione -->
+    <div id="navigation">
+      <button id="view-tratte-btn">Tratte Percorse</button>
+      <button id="view-riepiloghi-btn">Riepiloghi</button>
+      <button id="view-profile-btn">Profilo</button>
+    </div>
+
+    <!-- Pulsante "Back" -->
+    <button id="btn-logout">logout</button>
+
+    <!-- Sezione per visualizzare le tratte percorse -->
+    <section id="tratte" class="active">
+      <h2>Tratte Percorse</h2>
+      <div id="tratte-list">
+        <!-- Le tratte percorse verranno caricate qui -->
+      </div>
+    </section>
+
+    <!-- Sezione per visualizzare i riepiloghi -->
+    <section id="riepiloghi">
+      <h2>Riepiloghi</h2>
+      <div id="riepiloghi-list">
+        <!-- I riepiloghi verranno caricati qui -->
+      </div>
+    </section>
+
+    <!-- Sezione per visualizzare/modificare i dati del profilo -->
+    <section id="profile">
+      <h2>Profilo</h2>
+      <div class="profile-field">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="profile-field">
+        <label for="cognome">Cognome:</label>
+        <input type="text" id="cognome" name="cognome" required>
+      </div>
+      <div class="profile-field">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="profile-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="profile-actions">
+        <button id="save-profile-btn">Salva Profilo</button>
+      </div>
+    </section>
+  </body>
+</html>
