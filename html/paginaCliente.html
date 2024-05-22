@@ -10,21 +10,24 @@
     <!-- inclusione CryptoJS tramite CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
+    <!-- inclusione file js esterno -->
     <script src="../JS/gestioneCliente.js"></script>
 
+    <!-- foglio di stile della pagina -->
     <link rel="stylesheet" href="../styles/clientStyle.css">
 
 
     <script>
       $(document).ready(function () {
-        // Funzione per mostrare la sezione selezionata
+        //funzione per mostrare la sezione selezionata
         function showSection(sectionId) {
           $('section').removeClass('active');
           $(sectionId).addClass('active');
         }
 
-        // gestione click dei pulsanti
+        //gestione click dei pulsanti
 
+        //sezione delle tratte
         $("#view-tratte-btn").click(function () {
           
           showSection('#tratte');
@@ -32,14 +35,16 @@
 
         });
 
-
+        //sezione riepiloghi
         $("#view-riepiloghi-btn").click(function () {
           
+
           showSection('#riepiloghi');
           // Caricare e visualizzare i riepiloghi, se necessario
 
         });
 
+        //
         $("#view-profile-btn").click(function () {
           
           showSection('#profile');
@@ -51,7 +56,7 @@
         $("#save-profile-btn").click(function () {
           
           //aggiornamento profilo
-          alert("profilo aggiornato");
+          saveProfile();
         });
 
         $("#btn-logout").click(function () {
@@ -72,7 +77,6 @@
     <!-- Pulsanti di navigazione -->
     <div id="navigation">
       <button id="view-tratte-btn">Tratte Percorse</button>
-      <button id="view-riepiloghi-btn">Riepiloghi</button>
       <button id="view-profile-btn">Profilo</button>
     </div>
 

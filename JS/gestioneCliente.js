@@ -9,6 +9,7 @@ function loadTratte() {
                 tratteList.empty();
                 if (response.status === "ok") {
                     response.data.forEach(function (tratta) {
+                        
                         // creo un div per ciascuna tratta con dettagli
                         let trattaDiv = `
                             <div class="tratta">
@@ -18,6 +19,7 @@ function loadTratte() {
                                 <span><b>Tipo:</b> ${tratta.tipo}</span>
                             </div>
                         `;
+                        
                         tratteList.append(trattaDiv);
                     });
                 } else {
@@ -34,28 +36,6 @@ function loadTratte() {
     
 }
 
-//funzione per caricare i riepiloghi
-function loadRiepiloghi() {
-    $.ajax({
-        type: "GET",
-        url: "../php/ajaxLoadRiepiloghi.php",
-        success: function (response) {
-            try {
-                let riepiloghiList = $("#riepiloghi-list");
-                riepiloghiList.empty();
-                if (response["status"] == "ok") {
-                    response["data"].forEach(function (riepilogo) {
-                        riepiloghiList.append(`<div>${riepilogo}</div>`);
-                    });
-                } else {
-                    riepiloghiList.append(`<div>${response["message"]}</div>`);
-                }
-            } catch (error) {
-                alert(error);
-            }
-        },
-    });
-}
 
 //funzione per caricare i dati del profilo
 function loadProfile() {
@@ -103,7 +83,7 @@ function saveProfile() {
             success: function (response) {
                 try {
                     if (response["status"] == "ok") {
-                        alert("Profilo aggiornato!");
+                        alert(response["message"]);
                     } else {
                         alert(response["message"]);
                     }
