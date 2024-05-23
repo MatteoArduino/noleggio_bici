@@ -17,10 +17,12 @@ $nome = $_POST['nome'];
 $cognome = $_POST['cognome'];
 $email = $_POST['email'];
 $password = $_POST['password'];
+$carta_credito = $_POST['carta_credito']; // Aggiunto il recupero del numero della carta di credito
 
-$sql = "UPDATE cliente SET nome = ?, cognome = ?, email = ?, password = ? WHERE id = ?";
+// Modifica la query per includere anche il numero della carta di credito
+$sql = "UPDATE cliente SET nome = ?, cognome = ?, email = ?, password = ?, numero_carta = ? WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssi", $nome, $cognome, $email, $password, $user_id);
+$stmt->bind_param("sssssi", $nome, $cognome, $email, $password, $carta_credito, $user_id); // Aggiunto il bind del numero della carta di credito
 
 if ($stmt->execute()) {
     echo json_encode(["status" => "ok", "message" => "Profilo aggiornato!"]);
@@ -30,4 +32,5 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+
 

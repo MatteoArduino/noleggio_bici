@@ -1,117 +1,145 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Gestione Noleggio Bici</title>
     <link rel="stylesheet" href="../styles/adminStyle.css">
-</head>
-<body>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../JS/gestioneAdmin.js" defer></script>
+
+    <script>
+      $(document).ready(function () {
+
+        
+          loadStazioni();
+          loadBici();
+
+          function showSection(sectionId) {
+
+            $('section').removeClass('active');
+            $(`#${sectionId}`).addClass('active');
+
+          }
+      
+          $("#btn-manageStations").click(function () {
+              showSection('manageStations');
+          });
+
+          $("#btn-manageBicycles").click(function () {
+              showSection('manageBicycles');
+          });
+
+          $("#btn-addStation").click(function () {
+              addStation();
+              
+          });
+
+          $("#btn-removeStation").click(function () {
+              removeStation();
+              
+          });
+
+          $("#btn-addBicycle").click(function () {
+              addBici();
+          });
+
+          $("#btn-removeBicycle").click(function () {
+              removeBici();
+          });
+
+          $("#btn-logout").click(function () {
+              
+            // logout
+            window.location.href = "../php/logout.php";
+            
+          });
+      });
+  </script>
+  </head>
+  <body>
     <div id="navigation">
-        <button onclick="showSection('manageStations')">Gestione Stazioni</button>
-        <button onclick="showSection('manageBicycles')">Gestione Biciclette</button>
+      <button id="btn-manageStations">Gestione Stazioni</button>
+      <button id="btn-manageBicycles">Gestione Biciclette</button>
     </div>
 
-    <!-- Pulsante "Back" -->
-    <button id="btn-logout">logout</button>
+    <button id="btn-logout">Logout</button>
 
     <section id="manageStations" class="active">
-        <h2>Gestione Stazioni</h2>
-        <div>
-            <h3>Aggiungi Stazione</h3>
-            <div class="input-group">
-                <label for="stationName">Nome Stazione:</label>
-                <input type="text" id="stationName" name="stationName">
-            </div>
-            <div class="input-group">
-                <label for="slotTotal">Slot Totali:</label>
-                <input type="number" id="slotTotal" name="slotTotal">
-            </div>
-            <div class="input-group">
-                <label for="longitude">Longitudine:</label>
-                <input type="text" id="longitude" name="longitude">
-            </div>
-            <div class="input-group">
-                <label for="latitude">Latitudine:</label>
-                <input type="text" id="latitude" name="latitude">
-            </div>
-            <button onclick="addStation()">Aggiungi</button>
+      <h2>Gestione Stazioni</h2>
+      <div>
+        <h3>Aggiungi Stazione</h3>
+        <div class="input-group">
+          <label for="stationName">Nome Stazione:</label>
+          <input type="text" id="stationName" name="stationName">
         </div>
+        <div class="input-group">
+          <label for="slotTotal">Slot Totali:</label>
+          <input type="number" id="slotTotal" name="slotTotal">
+        </div>
+        <div class="input-group">
+          <label for="longitude">Longitudine:</label>
+          <input type="text" id="longitude" name="longitude">
+        </div>
+        <div class="input-group">
+          <label for="latitude">Latitudine:</label>
+          <input type="text" id="latitude" name="latitude">
+        </div>
+        <button id="btn-addStation">Aggiungi</button>
+      </div>
 
-        <div>
-            <h3>Rimuovi Stazione</h3>
-            <div class="input-group">
-                <label for="stationId">ID Stazione:</label>
-                <input type="number" id="stationId" name="stationId">
-            </div>
-            <button onclick="removeStation()">Rimuovi</button>
+      <div>
+        <h3>Rimuovi Stazione</h3>
+        <div class="input-group">
+          <label for="stationSelect">Nome Stazione:</label>
+          <select id="stationSelect" name="stationSelect">
+            <!-- la select sarà popolata dinamicamente dal db-->
+          </select>
         </div>
-        
-        <!-- Altri campi per aggiungere/rimuovere slot possono essere aggiunti qui -->
+        <button id="btn-removeStation">Rimuovi</button>
+      </div>
     </section>
 
     <section id="manageBicycles">
-        <h2>Gestione Biciclette</h2>
-        <div>
-            <h3>Aggiungi Bicicletta</h3>
-            <div class="input-group">
-                <label for="bikeState">Stato:</label>
-                <select id="bikeState" name="bikeState">
-                    <option value="disponibile">Disponibile</option>
-                    <option value="occupata">Occupata</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="kmTraveled">KM Percorsi:</label>
-                <input type="number" id="kmTraveled" name="kmTraveled">
-            </div>
-            <div class="input-group">
-                <label for="gps">GPS:</label>
-                <input type="text" id="gps" name="gps">
-            </div>
-            <div class="input-group">
-                <label for="rfid">RFID:</label>
-                <input type="text" id="rfid" name="rfid">
-            </div>
-            <button onclick="addBicycle()">Aggiungi</button>
+      <h2>Gestione Biciclette</h2>
+      <div>
+        <h3>Aggiungi Bicicletta</h3>
+        <div class="input-group">
+          <label for="bikeState">Stato:</label>
+          <select id="bikeState" name="bikeState">
+            <option value="disponibile">Disponibile</option>
+            <option value="occupata">Occupata</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="kmTraveled">KM Percorsi:</label>
+          <input type="number" id="kmTraveled" name="kmTraveled">
+        </div>
+        <div class="input-group">
+          <label for="gps">GPS:</label>
+          <input type="text" id="gps" name="gps">
+        </div>
+        <div class="input-group">
+          <label for="rfid">RFID:</label>
+          <input type="text" id="rfid" name="rfid">
+        </div>
+        <button id="btn-addBicycle">Aggiungi</button>
+      </div>
+
+      <div>
+        <h3>Rimuovi Bicicletta</h3>
+
+        <div class="input-group">
+          <label for="bikeSelect">id bicicletta:</label>
+          <select id="bikeSelect" name="bikeSelect">
+            <!-- la select sarà popolata dinamicamente dal db-->
+          </select>
         </div>
 
-        <div>
-            <h3>Rimuovi Bicicletta</h3>
-            <div class="input-group">
-                <label for="bikeId">ID Bicicletta:</label>
-                <input type="number" id="bikeId" name="bikeId">
-            </div>
-            <button onclick="removeBicycle()">Rimuovi</button>
-        </div>
-        
-        <!-- Altri campi per modificare le informazioni della bicicletta possono essere aggiunti qui -->
+        <button id="btn-removeBicycle">Rimuovi</button>
+      </div>
     </section>
 
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-        }
-        
-        // Placeholder functions for adding/removing stations and bicycles
-        function addStation() {
-            alert('Funzione per aggiungere una stazione');
-        }
-        
-        function removeStation() {
-            alert('Funzione per rimuovere una stazione');
-        }
-        
-        function addBicycle() {
-            alert('Funzione per aggiungere una bicicletta');
-        }
-        
-        function removeBicycle() {
-            alert('Funzione per rimuovere una bicicletta');
-        }
-    </script>
-</body>
+  </body>
 </html>

@@ -16,7 +16,7 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Inizializza la mappa centrata sulla scuola
-        var map = L.map("map").setView([45.6872271, 9.1771582], 13);
+        var map = L.map("map").setView([45.4646664, 9.1715464], 13);
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           attribution: "© OpenStreetMap contributors",
@@ -38,7 +38,7 @@
 
       function addMarker(map, response) {
         var marker = L.marker([response["lon"], response["lat"]]).addTo(map);
-        marker.bindPopup(response["nome"]);
+        marker.bindPopup("<a href='../php/paginaStazioni.php'>"+ response["nome"] +"</a>");
       }
     </script>
   </head>

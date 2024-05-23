@@ -24,7 +24,8 @@ function loadMap() {
 
 function addMarker(map, response) {
     var marker = L.marker([response["lon"], response["lat"]]).addTo(map);
-    marker.bindPopup("<a href='paginaStazioni.html'>"+ response["nome"] +"</a>");
+    marker.bindPopup("<a href='../php/paginaStazioni.php?id=" + response["id"] + "'>" + response["nome"] + "</a>");
+
 }
 
 //funzione per caricare le tratte percorse
@@ -94,11 +95,11 @@ function saveProfile() {
     let cognome = $("#cognome").val();
     let email = $("#email").val();
     let password = $("#password").val();
-
-    if (nome == "" || cognome == "" || email == "" || password == "") {
+    let cartaCredito = $("#carta_credito").val();
+    if (nome == "" || cognome == "" || email == "" || password == "" || cartaCredito == "") { // Verifica se tutti i campi sono compilati
         alert("ERRORE! Compilare tutti i campi");
     } else {
-        let pswMD5 = CryptoJS.MD5(password).toString();
+        let pswMD5 = CryptoJS.MD5(password).toString(); // Calcola l'hash della password
 
         $.ajax({
             type: "POST",
@@ -108,6 +109,7 @@ function saveProfile() {
                 cognome: cognome,
                 email: email,
                 password: pswMD5,
+                carta_credito: cartaCredito 
             },
             success: function (response) {
                 try {
