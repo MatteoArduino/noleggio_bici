@@ -1,3 +1,32 @@
+function loadMap() {
+
+    // Inizializza la mappa centrata sulla scuola
+    var map = L.map("map").setView([45.4646664, 9.1715464], 13);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+
+    $.ajax({
+        type: "GET",
+        url: "../php/getStazioni.php",
+        success: function (response) {
+            for (let i = 0; i < response.length; i++) {
+                addMarker(map, response[i]);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Errore AJAX: ", status, error);
+        },
+    });
+
+}
+
+function addMarker(map, response) {
+    var marker = L.marker([response["lon"], response["lat"]]).addTo(map);
+    marker.bindPopup("<a href='paginaStazioni.html'>"+ response["nome"] +"</a>");
+}
+
 //funzione per caricare le tratte percorse
 function loadTratte() {
     $.ajax({
@@ -9,7 +38,7 @@ function loadTratte() {
                 tratteList.empty();
                 if (response.status === "ok") {
                     response.data.forEach(function (tratta) {
-                        
+
                         // creo un div per ciascuna tratta con dettagli
                         let trattaDiv = `
                             <div class="tratta">
@@ -19,7 +48,7 @@ function loadTratte() {
                                 <span><b>Tipo:</b> ${tratta.tipo}</span>
                             </div>
                         `;
-                        
+
                         tratteList.append(trattaDiv);
                     });
                 } else {
@@ -33,7 +62,7 @@ function loadTratte() {
             alert("Errore nella richiesta AJAX: " + status + " - " + error);
         }
     });
-    
+
 }
 
 

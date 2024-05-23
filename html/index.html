@@ -38,7 +38,7 @@
 
       function addMarker(map, response) {
         var marker = L.marker([response["lon"], response["lat"]]).addTo(map);
-        marker.bindPopup("ID: " + response["id"]);
+        marker.bindPopup(response["nome"]);
       }
     </script>
   </head>

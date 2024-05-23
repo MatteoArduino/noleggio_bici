@@ -1,39 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gestione Noleggio Bici</title>
+    <link rel="stylesheet" href="../styles/adminStyle.css">
+</head>
+<body>
+    <div id="navigation">
+        <button onclick="showSection('manageStations')">Gestione Stazioni</button>
+        <button onclick="showSection('manageBicycles')">Gestione Biciclette</button>
+    </div>
 
-    <!-- inclusione di jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Pulsante "Back" -->
+    <button id="btn-logout">logout</button>
 
-    <!-- inclusione CryptoJS tramite CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <section id="manageStations" class="active">
+        <h2>Gestione Stazioni</h2>
+        <div>
+            <h3>Aggiungi Stazione</h3>
+            <div class="input-group">
+                <label for="stationName">Nome Stazione:</label>
+                <input type="text" id="stationName" name="stationName">
+            </div>
+            <div class="input-group">
+                <label for="slotTotal">Slot Totali:</label>
+                <input type="number" id="slotTotal" name="slotTotal">
+            </div>
+            <div class="input-group">
+                <label for="longitude">Longitudine:</label>
+                <input type="text" id="longitude" name="longitude">
+            </div>
+            <div class="input-group">
+                <label for="latitude">Latitudine:</label>
+                <input type="text" id="latitude" name="latitude">
+            </div>
+            <button onclick="addStation()">Aggiungi</button>
+        </div>
 
-    <script src="../JS/accesso.js"></script>
+        <div>
+            <h3>Rimuovi Stazione</h3>
+            <div class="input-group">
+                <label for="stationId">ID Stazione:</label>
+                <input type="number" id="stationId" name="stationId">
+            </div>
+            <button onclick="removeStation()">Rimuovi</button>
+        </div>
+        
+        <!-- Altri campi per aggiungere/rimuovere slot possono essere aggiunti qui -->
+    </section>
 
-    <!-- <link rel="stylesheet" href="../styles/loginStyle.css"> -->
+    <section id="manageBicycles">
+        <h2>Gestione Biciclette</h2>
+        <div>
+            <h3>Aggiungi Bicicletta</h3>
+            <div class="input-group">
+                <label for="bikeState">Stato:</label>
+                <select id="bikeState" name="bikeState">
+                    <option value="disponibile">Disponibile</option>
+                    <option value="occupata">Occupata</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="kmTraveled">KM Percorsi:</label>
+                <input type="number" id="kmTraveled" name="kmTraveled">
+            </div>
+            <div class="input-group">
+                <label for="gps">GPS:</label>
+                <input type="text" id="gps" name="gps">
+            </div>
+            <div class="input-group">
+                <label for="rfid">RFID:</label>
+                <input type="text" id="rfid" name="rfid">
+            </div>
+            <button onclick="addBicycle()">Aggiungi</button>
+        </div>
+
+        <div>
+            <h3>Rimuovi Bicicletta</h3>
+            <div class="input-group">
+                <label for="bikeId">ID Bicicletta:</label>
+                <input type="number" id="bikeId" name="bikeId">
+            </div>
+            <button onclick="removeBicycle()">Rimuovi</button>
+        </div>
+        
+        <!-- Altri campi per modificare le informazioni della bicicletta possono essere aggiunti qui -->
+    </section>
 
     <script>
-      // gestione dei click dei pulsanti
-      $(document).ready(function () {
-        // ottenimento ruolo (client o admin)
-        $("#btn-login").click(function () {
-          // login
-          login();
-        });
-
-        $("#btn-back").click(function () {
-          // porta alla pagina iniziale
-          window.location.href = "../html/index.html";
-        });
-      });
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+        
+        // Placeholder functions for adding/removing stations and bicycles
+        function addStation() {
+            alert('Funzione per aggiungere una stazione');
+        }
+        
+        function removeStation() {
+            alert('Funzione per rimuovere una stazione');
+        }
+        
+        function addBicycle() {
+            alert('Funzione per aggiungere una bicicletta');
+        }
+        
+        function removeBicycle() {
+            alert('Funzione per rimuovere una bicicletta');
+        }
     </script>
-  </head>
-  <body>
-    
-    <h1>aggiungi/rimuovi stazione</h1>
-    
-
-  </body>
+</body>
 </html>

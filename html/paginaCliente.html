@@ -16,6 +16,13 @@
     <!-- foglio di stile della pagina -->
     <link rel="stylesheet" href="../styles/clientStyle.css">
 
+    <!-- foglio di stile per la mappa -->
+    <!-- <link rel="stylesheet" href="../styles/style.css"> -->
+
+    <!-- dipendenze della mappa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 
     <script>
       $(document).ready(function () {
@@ -27,6 +34,15 @@
 
         //gestione click dei pulsanti
 
+        //sezione mappa
+        $("#view-map-btn").click(function () {
+          
+
+          showSection('#map');
+          loadMap();
+
+        });
+
         //sezione delle tratte
         $("#view-tratte-btn").click(function () {
           
@@ -35,14 +51,7 @@
 
         });
 
-        //sezione riepiloghi
-        $("#view-riepiloghi-btn").click(function () {
-          
-
-          showSection('#riepiloghi');
-          // Caricare e visualizzare i riepiloghi, se necessario
-
-        });
+        
 
         //
         $("#view-profile-btn").click(function () {
@@ -68,14 +77,15 @@
         
 
         // Mostra la prima sezione di default
-        showSection('#tratte');
-        loadTratte();
+        showSection('#map');
+        loadMap();
       });
     </script>
   </head>
   <body>
     <!-- Pulsanti di navigazione -->
     <div id="navigation">
+      <button id="view-map-btn">Mappa</button>
       <button id="view-tratte-btn">Tratte Percorse</button>
       <button id="view-profile-btn">Profilo</button>
     </div>
@@ -83,19 +93,19 @@
     <!-- Pulsante "Back" -->
     <button id="btn-logout">logout</button>
 
+    <!-- sezione della mappa -->
+    <section id="map" class="active">
+
+      <div id="map"></div>
+
+    </section>
+    
+
     <!-- Sezione per visualizzare le tratte percorse -->
-    <section id="tratte" class="active">
+    <section id="tratte">
       <h2>Tratte Percorse</h2>
       <div id="tratte-list">
         <!-- Le tratte percorse verranno caricate qui -->
-      </div>
-    </section>
-
-    <!-- Sezione per visualizzare i riepiloghi -->
-    <section id="riepiloghi">
-      <h2>Riepiloghi</h2>
-      <div id="riepiloghi-list">
-        <!-- I riepiloghi verranno caricati qui -->
       </div>
     </section>
 
