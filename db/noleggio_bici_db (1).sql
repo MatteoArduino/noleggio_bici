@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 21, 2024 alle 11:50
+-- Creato il: Mag 24, 2024 alle 01:04
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.0.28
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nome`, `cognome`, `email`, `password`) VALUES
-(1, 'gianluca', 'torre', 'gianluca.torre@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99');
+(1, 'gianluca', 'torre', 'gianluca.torre@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(2, 'raymond', 'holt', 'raymond.holt@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -55,6 +56,13 @@ CREATE TABLE `bicicletta` (
   `gps` char(8) NOT NULL,
   `rfid` char(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `bicicletta`
+--
+
+INSERT INTO `bicicletta` (`id`, `stato`, `km_percorsi`, `gps`, `rfid`) VALUES
+(1, 'disponibile', 0, '0001', '0001');
 
 -- --------------------------------------------------------
 
@@ -79,7 +87,7 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id`, `nome`, `cognome`, `email`, `password`, `numero_carta`, `numero_tessera`, `id_indirizzo`) VALUES
 (1, 'luigi', 'fresco', 'luigi.fresco@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, '8551c8d2', 1),
-(2, 'jake', 'peralta', 'jake.peralta@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, 'dfdb8ffa', 1),
+(2, 'jake', 'peralta', 'jake.peralta@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', '00000000', 'dfdb8ffa', 1),
 (3, 'mario', 'rossi', 'mario.rossi@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, '34be785b', 3);
 
 -- --------------------------------------------------------
@@ -115,16 +123,18 @@ CREATE TABLE `operazione` (
   `data_ora` datetime NOT NULL,
   `distanza_percorsa` int(11) DEFAULT NULL,
   `tipo` enum('noleggio','riconsegna') NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `id_stazione` int(11) NOT NULL,
+  `id_bici` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `operazione`
 --
 
-INSERT INTO `operazione` (`id`, `data_ora`, `distanza_percorsa`, `tipo`, `user_id`) VALUES
-(1, '2024-05-21 10:05:01', NULL, 'noleggio', 2),
-(2, '2024-05-21 11:24:38', 15, 'riconsegna', 2);
+INSERT INTO `operazione` (`id`, `data_ora`, `distanza_percorsa`, `tipo`, `user_id`, `id_stazione`, `id_bici`) VALUES
+(1, '2024-05-21 10:05:01', NULL, 'noleggio', 2, 0, 0),
+(2, '2024-05-21 11:24:38', 15, 'riconsegna', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -146,7 +156,8 @@ CREATE TABLE `stazione` (
 --
 
 INSERT INTO `stazione` (`id`, `nome`, `slot_disponibili`, `slot_totali`, `lon`, `lat`) VALUES
-(1, 'stazione 1', 50, 50, '45.675733', '9.209455');
+(1, 'stazione 1', 50, 50, '45.4700915', '9.17959373'),
+(3, 'universita', 50, 50, '45.46065803', '9.19408688');
 
 --
 -- Indici per le tabelle scaricate
@@ -185,7 +196,8 @@ ALTER TABLE `indirizzo`
 --
 ALTER TABLE `operazione`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `id_stazione` (`id_stazione`,`id_bici`);
 
 --
 -- Indici per le tabelle `stazione`
@@ -201,13 +213,13 @@ ALTER TABLE `stazione`
 -- AUTO_INCREMENT per la tabella `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `bicicletta`
 --
 ALTER TABLE `bicicletta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `cliente`
@@ -231,7 +243,7 @@ ALTER TABLE `operazione`
 -- AUTO_INCREMENT per la tabella `stazione`
 --
 ALTER TABLE `stazione`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Limiti per le tabelle scaricate
